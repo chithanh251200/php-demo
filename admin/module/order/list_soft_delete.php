@@ -36,9 +36,8 @@
     if(isset($_POST['btn-submit-search'])){
         $keyword = $_POST['keyword'];
         $sql = mysqli_query($conn , "SELECT * FROM `order` , `customer`
-            WHERE  `order`.`id_customer` = `customer`.`id_customer` and `code_sp` LIKE '%{$keyword}%' and `is_delete` = 0
+            WHERE  `order`.`id_customer` = `customer`.`id_customer` and `code_sp` LIKE '%{$keyword}%' and `is_delete` = 1
         ");
-
 
         // show_data($sql);
 
@@ -50,7 +49,7 @@
     }
     // 
     else{
-        $sql = mysqli_query($conn , "SELECT * FROM `order` , `customer` WHERE `order`.`id_customer` = `customer`.`id_customer` and `is_delete` = 0 LIMIT $start , $sotincanlay ");
+        $sql = mysqli_query($conn , "SELECT * FROM `order` , `customer` WHERE `order`.`id_customer` = `customer`.`id_customer` and `is_delete` = 1 LIMIT $start , $sotincanlay ");
         $data = [];
         while($items = mysqli_fetch_array($sql)){
             $data[] = $items;
@@ -63,22 +62,38 @@
     // (is_delte = 1 là đã xóa tạm thời rồi )
     if(isset($_POST['btn_apply'])){
         $act = $_POST['act'];
-        $apply = $_POST['check_list'];
-        if($act == 'delete'){
-            for($i = 0 ; $i < count($apply) ; $i++){
-                // echo "$i";
-                $del_id = $apply[$i];
-                // echo "$del_id";
-                $sql = mysqli_query($conn , "UPDATE `order` SET `is_delete` = 1 WHERE `id_order` = '{$del_id}' ");
-                header('location:?module=order&act=list');
+        $check_list = $_POST['check_list'];
+        if(!empty($check_list)){
+            if($act == 'restore'){
+                for($i = 0 ; $i < count($check_list) ; $i++){
+                    // echo "$i";
+                    $restore_id = $check_list[$i];
+                    // echo "$del_id";
+                    $sql = mysqli_query($conn , "UPDATE `order` SET `is_delete` = 0 WHERE `id_order` = '{$restore_id}' ");
+                    header('location:?module=order&act=list');
+                }
             }
+            else{
+                echo "không tạm thời không thành công";
+            }
+            if($act == 'foce_delete'){
+                for($i = 0 ; $i < count($check_list) ; $i++){
+                    // echo "$i";
+                    $foce_id = $check_list[$i];
+                    // echo "$del_id";
+                    $sql = mysqli_query($conn , "DELETE FROM `order`  WHERE `id_order` = '{$foce_id}' ");
+                    header('location:?module=order&act=list');
+                }
+            }
+            else{
+                echo "Xóa vĩnh viễn không thành công";
+            }
+    
+            // show_data($apply);
         }
-        else{
-            echo "không tạm thời không thành công";
-        }
-        // show_data($apply);
         
     }
+
 
 
 
@@ -109,6 +124,7 @@
                 <div class="form-action form-inline py-3">
                     <select class="form-control mr-1" name="act" id="">
                         <option>Chọn</option>
+                        <option value="restore">Khôi phục</option>
                         <option value="delete">Xóa tạm thời</option>
                     </select>
                     <input type="submit" name="btn_apply" value="Áp dụng" class="btn btn-primary">

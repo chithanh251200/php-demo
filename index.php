@@ -1,4 +1,5 @@
 <?php
+    ob_start();
     session_start();
 ?>
 
@@ -9,6 +10,15 @@
 
     // giỏ hàng 
     require 'lib/get_cart.php';
+
+     // account khách hàng
+     require 'lib/get_check.php';
+
+
+    // phân trang 
+    require 'admin/lib/padding.php';
+     
+
 ?>
 
 

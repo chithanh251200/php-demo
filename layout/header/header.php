@@ -30,10 +30,10 @@
                             <div id="main-menu-wp" class="fl-right">
                                 <ul id="main-menu" class="clearfix">
                                     <li>
-                                        <a href="?page=home" title="">Trang chủ</a>
+                                        <a href="?module=home&act=home" title="">Trang chủ</a>
                                     </li>
                                     <li>
-                                        <a href="?page=category_product" title="">Sản phẩm</a>
+                                        <a href="?module=product&act=all-main" title="">Sản phẩm</a>
                                     </li>
                                     <li>
                                         <a href="?page=blog" title="">Blog</a>
@@ -44,13 +44,37 @@
                                     <li>
                                         <a href="?page=detail_blog" title="">Liên hệ</a>
                                     </li>
+
+                                    <?php
+                                        if(!empty($_SESSION['is_username'])){
+                                    ?>
+                                        <li>
+                                            <a href="login.php" title="" style="color:#ace492;"> <span>TK : </span><?php echo $_SESSION['is_username'] ?></a>
+                                        </li>
+                                        <li>
+                                            <a href="logout.php" title="">Đăng xuất</a>
+                                        </li>
+                                    <?php
+                                        }else{
+                                    ?>
+                                        <li>
+                                            <a href="login.php" title="">Đăng nhập</a>
+                                        </li>
+                                        <li>
+                                            <a href="registion.php" title="">Đăng ký</a>
+                                        </li>
+                                    <?php
+                                        }
+                                    ?>
+
+                                   
                                 </ul>
                             </div>
                         </div>
                     </div>
                     <div id="head-body" class="clearfix">
                         <div class="wp-inner">
-                            <a href="?page=home" title="" id="logo" class="fl-left"><img src="asset/public/images/logo.png"/></a>
+                            <a href="?module=home&act=home" title="" id="logo" class="fl-left"><img src="asset/public/images/logo.png"/></a>
                             <div id="search-wp" class="fl-left">
                                 <form method="POST" action="">
                                     <input type="text" name="s" id="s" placeholder="Nhập từ khóa tìm kiếm tại đây!">

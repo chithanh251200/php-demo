@@ -1,7 +1,6 @@
 <?php
     $id_update_product = $_GET['id_product'];
-    echo $id_update_product;
-
+    // echo $id_update_product;
 
 
     $sql = mysqli_query($conn , "SELECT * FROM `product` WHERE `id_product` = '{$id_update_product}' ");
@@ -30,6 +29,20 @@
         else{
             $price = $_POST['price'];
         }
+        // end
+        if(empty($_POST['code'])){
+            $error['code'] = 'Vui lòng nhập thông đầy đủ';
+        }
+        else{
+            $code = $_POST['code'];
+        }
+        // end 
+        if(empty($_POST['qty'])){
+            $error['qty'] = 'Vui lòng nhập thông đầy đủ';
+        }
+        else{
+            $qty = $_POST['qty'];
+        }
         // end 
 
         if(empty($_POST['cat_option'])){
@@ -57,16 +70,28 @@
                 $upldoa_file = $path.$file_name;
                 move_uploaded_file($_FILES["file"]["tmp_name"],$upldoa_file);
 
-                $update = mysqli_query($conn , "UPDATE `product` SET `name` = '{$name}' , `price` = '{$price}' , `thumbnail` = '{$upldoa_file}', `id_cat` = '{$cat_option}' ,  `id_user` = '{$user_option}'
-                WHERE `id_product` = '{$id_update_product}' ");
-                if($update > 0){
-                    echo "đã cập nhật thành công";
+                if($file_name){
+                    $update = mysqli_query($conn , "UPDATE `product` SET `name` = '{$name}' , `price` = '{$price}' , `code` = '{$code}' ,`qty` = '{$qty}' , `thumbnail` = '{$upldoa_file}', `id_cat` = '{$cat_option}' ,  `id_user` = '{$user_option}'
+                    WHERE `id_product` = '{$id_update_product}' ");
+                    if($update > 0){
+                        echo "đã cập nhật thành công";
+                    }
+                    else{
+                        echo "update không thành công";
+                    }
+                    header('location:?module=product&act=list');
                 }
                 else{
-                    echo "update không thành công";
+                    $update = mysqli_query($conn , "UPDATE `product` SET `name` = '{$name}' , `price` = '{$price}' , `code` = '{$code}' ,`qty` = '{$qty}' , `id_cat` = '{$cat_option}' ,  `id_user` = '{$user_option}'
+                    WHERE `id_product` = '{$id_update_product}' ");
+                    if($update > 0){
+                        echo "đã cập nhật thành công";
+                    }
+                    else{
+                        echo "update không thành công";
+                    }
+                    header('location:?module=product&act=list');
                 }
-                header('location:?module=product&act=list');
-
             }
         }
     }
@@ -90,6 +115,18 @@
             <div class="form-group">
                 <label for="price">Gía Sản phẩm</label>
                 <input type="text" name="price" class="form-control" value="<?php echo $row['price']?>">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <!-- end  -->
+            <div class="form-group">
+                <label for="code">Mã Sản phẩm</label>
+                <input type="text" name="code" class="form-control"  value="<?php echo $row['code']?>">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <!-- end  -->
+            <div class="form-group">
+                <label for="qty">Số lượng</label>
+                <input type="text" name="qty" class="form-control"  value="<?php echo $row['qty']?>">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <!-- end  -->

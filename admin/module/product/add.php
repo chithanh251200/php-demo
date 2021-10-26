@@ -46,11 +46,13 @@
           
             $name = $_POST['name'];
             $price = $_POST['price'];
+            $code = $_POST['code'];
+            $qty = $_POST['qty'];
             $id_cat = $_POST['cat_option'];
             $id_user = $_POST['user_option'];
 
-            $add = mysqli_query($conn , "INSERT INTO `product` (`name`,`price`,`thumbnail`,`id_cat`,`id_user`)
-                VALUES ('{$name}','{$price}','{$upldoa_file}','{$id_cat}','{$id_user}')
+            $add = mysqli_query($conn , "INSERT INTO `product` (`name`,`price`,`code`,`qty`,`thumbnail`,`id_cat`,`id_user`)
+                VALUES ('{$name}','{$price}','{$code}','{$qty}','{$upldoa_file}','{$id_cat}','{$id_user}')
             ");
 
             if($add > 0){
@@ -83,6 +85,18 @@
             <div class="form-group">
                 <label for="price">Gía Sản phẩm</label>
                 <input type="text" name="price" class="form-control">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <!-- end  -->
+            <div class="form-group">
+                <label for="code">Mã Sản phẩm</label>
+                <input type="text" name="code" class="form-control">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <!-- end  -->
+            <div class="form-group">
+                <label for="qty">Số lượng</label>
+                <input type="text" name="qty" class="form-control">
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <!-- end  -->

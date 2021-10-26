@@ -187,7 +187,7 @@
                         
                             <li>
                             <a href="?module=detail&act=main&id_sp=<?php echo $item['id_product'] ?>" title="" class="thumb">
-                                <img src="asset/public/images/img-pro-10.png">
+                                <img src="admin/<?php echo $item['thumbnail'] ?>">
                             </a>
                             <a href="?page=detail_product" title="" class="product-name"><?php echo $item['name'] ?></a>
                             <div class="price">
@@ -226,7 +226,7 @@
                             foreach($data_Cat as $value_cat){
                         ?>
                             <li>
-                                <a href="?page=cat_product=<?php echo $value_cat['id_cat']?>" title=""><?php echo $value_cat['name']?></a>      
+                                <a href="?module=product&act=category-main&id_cat=<?php echo $value_cat['id_cat']?>" title=""><?php echo $value_cat['name']?></a>      
                             </li>
                         <?php
                                 }
@@ -351,7 +351,7 @@
             <div class="section" id="banner-wp">
                 <div class="section-detail">
                     <a href="" title="" class="thumb">
-                        <img src="asset/public/images/banner.png" alt="">
+                        <!-- <img src="asset/public/images/banner.png" alt=""> -->
                     </a>
                 </div>
             </div>

@@ -17,7 +17,7 @@
 		if(empty($_POST['password'])){
 			$error['password'] = "vui lòng nhập tại khoản password . không được để trống";
 		}else{
-			$password = $_POST['password'];
+			$password = md5($_POST['password']);
 		}
 
 		// kiểm tra nếu không có lỗi

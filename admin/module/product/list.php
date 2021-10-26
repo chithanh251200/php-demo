@@ -118,6 +118,8 @@
                             <th scope="col" colspan ="2">#</th>
                             <th scope="col">Tên sản phẩm</th>
                             <th scope="col">Gía</th>
+                            <th scope="col">Code</th>
+                            <th scope="col">Số lượng</th>
                             <th scope="col">Hình ảnh</th>
                             <th scope="col">Danh Mục</th>
                             <th scope="col">Người tạo</th>
@@ -142,7 +144,9 @@
                                 </td> 
                                 <th scope="row"><?php echo $stt ?></th>
                                 <td><?php echo $item['name'] ?></td>
-                                <td><?php echo $item['price'] ?></td>    
+                                <td><?php echo number_format($item['price'] , 0 ,'.' , '.') ?>đ</td>
+                                <td><?php echo $item['code'] ?></td>
+                                <td><?php echo $item['qty'] ?></td>   
                                 <td>
                                     <img src=" <?php echo $item['thumbnail'] ?>" alt="" style="width:60px; height:60px;">
                                 </td>
