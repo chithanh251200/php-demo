@@ -35,7 +35,6 @@
         require $path;
     }else{
         require 'layout/404.php';
-        echo "hay";
     }
 
 
