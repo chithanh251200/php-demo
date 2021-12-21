@@ -26,7 +26,6 @@
         </div>
     </div>
     <div id="wrapper" class="wp-inner clearfix">
-        
         <!-- start  -->
         <?php
             if(!empty($get_sp_cart)){
@@ -46,7 +45,7 @@
                                 <td colspan="2">Thành tiền</td>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody">
                             <?php
                                     foreach($get_sp_cart as $value){
                             ?>
@@ -58,13 +57,15 @@
                                         </a>
                                     </td>
                                     <td>
-                                        <a href="" title="" class="name-product"><?php echo $value['name_cart'] ?></a>
+                                        <a href="" title="" class="name-product"><?php echo $value['name_cart'] ?>  </a>
                                     </td>
                                     <td><?php echo number_format($value['price_cart'],0,'.','.') ?>đ</td>
                                     <td>
-                                        <input type="number" name="qty[<?php echo $value['id_cart'] ?>]" min="1" max="1000" value="<?php echo $value['qty_cart'] ?>" class="num-order">
+                                        <input type="number" name="qty[<?php echo $value['id_cart'] ?>]" min="1" max="1000" value="<?php echo $value['qty_cart'] ?>" 
+                                        data-id="<?php echo $value['id_cart'] ?>" data-price="<?php echo $value['price_cart'] ?>"  
+                                        class="num-order" id="num-order">
                                     </td>
-                                    <td><?php echo number_format($value['currency_cart'],0,'.','.') ?>đ</td>
+                                    <td class="current_cart"><?php echo number_format($value['current_cart'],0,'.','.') ?>đ</td>
                                     <td>
                                         <a href="?module=cart&act=delete&id_cart=<?php echo $value['id_cart'] ?>" title="xóa" class="del-product"><i class="fa fa-trash-o"></i></a>
                                     </td>
@@ -79,7 +80,7 @@
                             <tr>
                                 <td colspan="7">
                                     <div class="clearfix">
-                                        <p id="total-price" class="fl-right">Tổng giá: <span>
+                                        <p id="total-price" class="fl-right">Tổng giá: <span id="total_new">
                                         <?php
                                         if(get_total_cart() != null){
                                             echo number_format(get_total_cart() , 0 ,'.','.');
@@ -87,8 +88,7 @@
                                         else{
                                             return 0;
                                         }
-                                        ?>
-                                        đ</span></p>
+                                        ?>đ</span></p>
                                     </div>
                                 </td>
                             </tr>
@@ -97,7 +97,7 @@
                                     <div class="clearfix">
                                         <div class="fl-right">
                                             <input type="submit" name="btn-update" id="update-cart" value="Cập nhật giỏ hàng">
-                                            <a href="?module=cart&act=checkout" title="" id="checkout-cart">Thanh toán</a>
+                                            <a href="<?php echo !empty($_SESSION['is_username']) ? '?module=cart&act=checkout' : 'login.php' ?>" title="" id="checkout-cart">Thanh toán</a>
                                         </div>
                                     </div>
                                 </td>
@@ -126,6 +126,88 @@
         ?>
         <!-- end  -->
     </div>
+
+    <div id="modal-notification">
+        <div id="notification"></div>
+    </div>
+
+
+    <script>
+
+        
+
+        $(document).ready(function(){
+        // chú ý cực kì quan trọng nếu lấy theo id thì nó chỉ lấy đc thần đầu tiên thoi ,  còn lấy theo class thì danh sách 
+
+            
+            $(".num-order").each(function(key , index){
+                $(index).click(function(e){
+                    // console.log(key);
+
+                    // lấy thành tiền 
+                    var currentList = document.querySelectorAll('.current_cart');
+                    // console.log(current_new);
+
+                    // lấy id
+                    var id = $(this).data('id');
+                    console.log(id);
+
+                   
+
+
+                    // số lượng new
+                    var num_order_new = $(this).val();
+                    // console.log(num_order_new);
+
+                    // price
+                    var price = $(this).data('price');
+                    // console.log(price+'=giá');
+
+                    // current new
+                    var currentNew = currentList[key];
+                    // console.log(currentNew);
+
+    
+                    $.ajax({
+                        url : "asset/public/ajax/show-cart.php",
+                        method : "POST",
+                        dataType : "json",
+                        data : {id : id , num_order_new : num_order_new , price : price},
+                        success : function(result){
+
+                                $.each(result , function(key , index){
+                                     // xuất currentnew
+                                    $(currentNew).text(index.current_new);
+                                    $('#total_new').text(index.total_new).css('color','red');
+
+                                // xuất thông báo khi cập nhật thành công
+                                    $('#notification').fadeIn();
+                                    $('#notification').html('<p class="success-update"> Cập nhật thành công</p>');
+                                    $('#modal-notification').css('z-index','1')
+                                    setTimeout(() => {
+                                        $('#notification').fadeOut();
+                                        $('#modal-notification').css('z-index','-1');
+                                    }, 2000);
+
+                              });
+
+                        }
+                    });
+                })
+            })
+            // end 
+
+
+            // xuất thông báo đã thêm ( trừ ) số lượng thành công 
+            // $(".num-order").each(function(key , index){
+            //     $(index).click(function(e){
+                        
+            //     }
+            // });
+
+        });
+    </script>
+
 
 <?php
     get_footer();

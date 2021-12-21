@@ -35,17 +35,22 @@
     // B : tiềm kiếm theo tên 
     if(isset($_POST['btn-submit-search'])){
         $keyword = $_POST['keyword'];
-        $sql = mysqli_query($conn , "SELECT * FROM `product` , `user`
-            WHERE  `product`.`id_user` = `user`.`id_user` LIKE '%{$keyword}%' and `is_delete` = 0
-        ");
-
-        show_data($sql);
-
-        $data = [];
-        while($items = mysqli_fetch_array($sql)){
-            $data[] = $items;
+        if($keyword != ''){
+            $sql = mysqli_query($conn , "SELECT * FROM `product` , `user` 
+            WHERE `product`.`id_user` = `user`.`id_user` and `name`  LIKE '%{$keyword}%' and `is_delete` = 0
+            ");
+            $data = [];
+            while($items = mysqli_fetch_array($sql)){
+                $data[] = $items;
+            }
+        }else{
+            $sql = mysqli_query($conn , "SELECT * FROM `product` , `user` WHERE `product`.`id_user` = `user`.`id_user` and `is_delete` = 0 LIMIT $start , $sotincanlay ");
+            $data = [];
+            while($items = mysqli_fetch_array($sql)){
+                $data[] = $items;
+            }
+            // show_data($data);
         }
-        show_data($data);
     }
     // 
     else{
@@ -67,15 +72,15 @@
             for($i = 0 ; $i < count($apply) ; $i++){
                 // echo "$i";
                 $del_id = $apply[$i];
-                // echo "$del_id";
-                $sql = mysqli_query($conn , "UPDATE `product` SET `is_delete` = 1 WHERE `id_cat` = '{$del_id}' ");
-                header('location:?module=product_cat&act=list');
+                echo "$del_id";
+                $sql = mysqli_query($conn , "UPDATE `product` SET `is_delete` = 1 WHERE `id_product` = '{$del_id}' ");
+                header('location:?module=product&act=list');
             }
         }
         else{
-            echo "không tạm thời không thành công";
+            echo "xáo tạm thời không thành công";
         }
-        // show_data($apply);
+        show_data($apply);
         
     }
 
@@ -93,20 +98,24 @@
             <h1 class="m-0 ">Danh Sách Sản Phẩm</h1>
             <div class="form-search form-inline">
                 <form action="" method="POST">
-                    <input type="text" class="form-control form-search" name="keyword" placeholder="Tìm kiếm">
+                    <input type="text" class="form-control form-search" name="keyword" placeholder="Tìm kiếm" value="<?php
+                    if(!empty($keyword)){
+                        echo $keyword ;
+                    }
+                    ?>">
                     <input type="submit" name="btn-submit-search" value="Tìm kiếm" class="btn btn-primary">
                 </form>
             </div>
         </div>
         <div class="card-body">
             <div class="analytic">
-                <a href="?module=product_cat&act=list" class="text-primary">Hoạt động<span class="text-muted"> (<?php echo $total ?>)</span></a>
+                <a href="?module=product&act=list" class="text-primary">Hoạt động<span class="text-muted"> (<?php echo $total ?>)</span></a>
             
-                <a href="?module=product_cat&act=list_soft_delete" class="text-primary">Không hoạt động<span class="text-muted"> (<?php echo $total_soft_delete ?>)</span></a>
+                <a href="?module=product&act=list_soft_delete" class="text-primary">Không hoạt động<span class="text-muted"> (<?php echo $total_soft_delete ?>)</span></a>
             </div>
             <form action="" method="POST">
                 <div class="form-action form-inline py-3">
-                    <select class="form-control mr-1" name="act" id="">
+                    <select class="form-control mr-1" name="act" id="select">
                         <option>Chọn</option>
                         <option value="delete">Xóa tạm thời</option>
                     </select>
@@ -140,7 +149,7 @@
                         ?>
                             <tr class="text-center">
                                 <td>
-                                    <input type="checkbox" name="check_list[]" value="<?php echo $item['id_cat'] ?>">
+                                    <input type="checkbox" name="check_list[]" value="<?php echo $item['id_product'] ?>">
                                 </td> 
                                 <th scope="row"><?php echo $stt ?></th>
                                 <td><?php echo $item['name'] ?></td>
@@ -169,22 +178,28 @@
                     </tbody>
                 </table>
             </form>
-            <nav aria-label="Page navigation example"></nav>
+            <?php
+                // không tồn tại keywword thì xuất phân trang , tồn tại keyword thì không xuất
+                if(empty($keyword)){
+            ?>
             <nav aria-label="Page navigation example">
                 <?php
                    echo padding($page , $total , $base='?module=product&act=list');
                 ?>
             </nav>
+            <?php
+                }
+            ?>
         </div>
     </div>
 </div>
 <!-- end  -->
-<div class="modal__notification active_notification">
+<!-- <div class="modal__notification active_notification">
     <div class="modal__notification--main">
         <h3 class="modal__notification--main-title">thông báo</h3>
         <p class="modal__notification--main-text">Đã xóa thành công</p>
     </div>
-</div>
+</div> -->
 
 
 

@@ -76,20 +76,6 @@ $(document).ready(function () {
         $('body,html').stop().animate({scrollTop: 0}, 800);
     });
 
-// CHOOSE NUMBER ORDER
-    var value = parseInt($('#num-order').attr('value'));
-    $('#plus').click(function () {
-        value++;
-        $('#num-order').attr('value', value);
-        update_href(value);
-    });
-    $('#minus').click(function () {
-        if (value > 1) {
-            value--;
-            $('#num-order').attr('value', value);
-        }
-        update_href(value);
-    });
 
 //  MAIN MENU
     $('#category-product-wp .list-item > li').find('.sub-menu').after('<i class="fa fa-angle-right arrow" aria-hidden="true"></i>');

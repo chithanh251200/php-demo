@@ -7,7 +7,8 @@
     require 'config/db.php';
     require 'lib/get_layouts.php';
     require 'helper/show_data.php';
-
+    require 'helper/form_error.php';
+    
     // giỏ hàng 
     require 'lib/get_cart.php';
 

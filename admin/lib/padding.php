@@ -1,7 +1,9 @@
 <?php
     function padding($page , $total , $base =""){
+
+        $str_ling = '';
     
-        $str_ling ="<ul class='pagination'>";
+        $str_ling .="<ul class='pagination'>";
 
         if($page >= 1){
             if($page > 1){

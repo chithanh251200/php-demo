@@ -77,13 +77,13 @@
                             <span class="title">Sản phẩm: </span>
                             <span class="status">Còn hàng</span>
                         </div>
-                        <p class="price"><?php echo number_format($row['price'],0,'.','.')?>đ</p>
+                        <p id="price" class="price"><?php echo number_format($row['price'],0,'.','.')?>đ</p>
                         <div id="num-order-wp">
                             <a title="" id="minus"><i class="fa fa-minus"></i></a>
-                            <input type="text" name="num-order" value="1" id="num-order">
+                            <input type="text" name="num-order" value="1" id="num-order" data-product="<?php echo $row['id_product'] ?>">
                             <a title="" id="plus"><i class="fa fa-plus"></i></a>
                         </div>
-                        <a href="?module=cart&act=add&id_sp=<?php echo $row['id_product'] ?>" title="Thêm giỏ hàng" class="add-cart">Thêm giỏ hàng</a>
+                        <a href="<?php echo !empty($_SESSION['is_username']) ? '?module=cart&act=add&id_sp='.$row["id_product"].' ' : 'login.php' ?>" title="Thêm giỏ hàng" class="add-cart">Thêm giỏ hàng</a>
                     </div>
                 </div>
             </div>
@@ -91,11 +91,38 @@
                 <div class="section-head">
                     <h3 class="section-title">Mô tả sản phẩm</h3>
                 </div>
-                <div class="section-detail">
+                <div id="info-detail" class="section-detail">
                     <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
                     <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
                     <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
                     <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                    <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                    <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                    <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                    <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                    <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                    <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                    <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                    <p>Máy tính xách tay HP Probook 440 G2 là dòng máy tính xách tay thích hợp cho doanh nghiệp và những người làm văn phòng. Do đó, ngoài cấu hình tốt, thiết kế bền bỉ, máy tính xách tay HP Probook 440 G2 còn có khả năng bảo mật toàn diện giúp bạn luôn yên tâm về dữ liệu của mình.</p>
+                </div>
+                <p id="see-more" >Xem thêm ...</p>
+                <p id="closed" >Thu gọn nội dung</p>
+            </div>
+            <div class="section" id="post-comment-wp">
+                <div id="load-comment">
+                
+                </div>
+                <!-- end  -->
+               <div class="comment-submit">
+                   <img src="asset/public/images/banner.png" alt="" class="list-comment-head__user-account">
+                    <div class="comment-submit-input">
+                        <form method="POST" id="form-submit">
+                            <input type="text" name="text-comment" id="text-comment" 
+                            data-account="<?php echo !empty($_SESSION['is_account']) ? $_SESSION['is_account'] : 0 ?>" 
+                            data-idproduct="<?php echo $row['id_product'] ?>" placeholder="Viết bình luận công khai..">
+                            <input type="submit" name="submit" id="btn-submit" value="Gửi">
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="section" id="same-category-wp">
@@ -271,6 +298,108 @@
             </div>
         </div>
     </div>
+
+<script>
+    $(document).ready(function () {
+        //lấy chiều height scroll để click vào xem thêm xuất ra chiều cao cho nó
+        var scrollheight = $('#info-detail')[0].scrollHeight+"px";
+
+        $('#see-more').click(function () {
+            $('#info-detail').css('height',scrollheight);
+            $(this).css('display','none');
+            $('#closed').css('display','block');
+        })
+
+
+
+        $('#closed').click(function () {
+            $('#info-detail').css('height','500px');
+            $(this).css('display','none');
+            $('#see-more').css('display','block');
+        })
+    });
+    
+
+    // Xử lý comment 
+    $(document).ready(function (){
+        $('#form-submit').submit(function (e) {
+       
+
+            // lấy session login . Nếu chưa đăng nhập thì chuyển đến trang đăng nhập 
+            var login = $('#text-comment').data('account');
+            // console.log(login)
+            
+            if(login == '1'){
+                // console.log(login)
+                e.preventDefault();
+                var inputText = $('#text-comment').val();
+                var idproduct = $('#text-comment').data('idproduct');
+              
+                $.ajax({
+                    url : "asset/public/ajax/comment.php",
+                    method : "POST",
+                    dataType : 'text',
+                    data : {inputText : inputText , idproduct : idproduct },
+                    success : function (data) {
+                        loadComment();
+                        $('#form-submit')[0].reset();
+                        
+                    }
+                })
+            }else{
+                $('#form-submit').attr('action' , 'login.php').submit();
+               
+            }
+
+            
+
+           
+        })
+
+        function loadComment() {
+            var idProduct_load_comment = $('#text-comment').data('idproduct');
+
+            $.ajax({
+                    url : "asset/public/ajax/comment.php",
+                    method : "POST",
+                    dataType : 'text',
+                    data : { idProduct_load_comment : idProduct_load_comment },
+                    success : function (data) {
+                        // console.log(data);
+                        $('#load-comment').html(data);
+                    }
+                })
+        }
+        loadComment();
+
+
+
+        // CHOOSE NUMBER ORDER
+        var value = parseInt($('#num-order').attr('value'));
+        $('#plus').click(function () {
+            value++;
+            // tăng số lượng
+            $('#num-order').attr('value', value);
+        });
+        $('#minus').click(function () {
+            if (value > 1) {
+                value--;
+                $('#num-order').attr('value', value);
+            }
+            // update_href(value);
+        });
+
+
+
+
+    });
+
+
+
+
+</script>
+
+
 <?php
     get_footer();
 ?>

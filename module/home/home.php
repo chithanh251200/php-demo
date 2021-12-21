@@ -196,7 +196,7 @@
                             </div>
                             <div class="action clearfix">
                                 <a href="?module=cart&act=add&id_sp=<?php echo $item['id_product'] ?>" title="Thêm giỏ hàng" class="add-cart fl-left">Thêm giỏ hàng</a>
-                                <a href="?page=checkout" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
+                                <a href="?module=cart&act=add&id_sp=<?php echo $item['id_product'] ?>" title="Mua ngay" class="buy-now fl-right">Mua ngay</a>
                             </div>
                         </li>
                         

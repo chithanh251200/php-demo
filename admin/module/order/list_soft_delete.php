@@ -140,7 +140,6 @@
                             <th scope="col">Tổng tiền</th>
                             <th scope="col">Ngày tạo</th>
                             <th scope="col">Ngày cập nhật</th>
-                            <th scope="col">Tác vụ</th>
                         </tr>
                     </thead>
 
@@ -164,10 +163,6 @@
                                 <td><?php echo  number_format($item['total_sp'], 0 ,'.' , '.') ?>đ</td>
                                 <td><?php echo $item['created_at'] ?></td>
                                 <td><?php echo $item['updated_at'] ?></td>
-                                <td>
-                                    <a href="?module=order&act=delete&id_order=<?php echo $item['id_order'] ?>" class="btn-delete btn btn-success btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit">xóa</i></a>
-                                    <a href="?module=order&act=update&id_order=<?php echo $item['id_order'] ?>" class="btn btn-danger btn-sm rounded-0 text-white" type="button" data-toggle="tooltip" data-placement="top" title="update"><i class="fa fa-trash">update</i></a>
-                                </td>
                             </tr>
                         <?php
                                 }
@@ -187,12 +182,12 @@
     </div>
 </div>
 <!-- end  -->
-<div class="modal__notification active_notification">
+<!-- <div id="modal__notification">
     <div class="modal__notification--main">
         <h3 class="modal__notification--main-title">thông báo</h3>
         <p class="modal__notification--main-text">Đã xóa thành công</p>
     </div>
-</div>
+</div> -->
 
 
 

@@ -29,7 +29,7 @@
             'qty_cart' => $qty,
             'thumbnail_cart' => $row['thumbnail'],
             // thành tiền 
-            'currency_cart' => $row['price'] * $qty,
+            'current_cart' => $row['price'] * $qty,
         );
 
         // cập nhật lại giỏ hàng
@@ -46,7 +46,7 @@
         // duyệt mảng session để tìm ra qty và thành tiền 
         foreach($_SESSION['cart']['buy'] as $item){
             $num_row += $item['qty_cart'];
-            $total += $item['currency_cart'];
+            $total += $item['current_cart'];
         }
 
         // tạo mảng session tổng số lượng và tổng all tiền 
@@ -104,7 +104,7 @@
                 $_SESSION['cart']['buy'][$key]['qty_cart'] = $new_qty;
                 
                 // thay đổi lại tổng tiền
-                $_SESSION['cart']['buy'][$key]['currency_cart'] = $new_qty * $_SESSION['cart']['buy'][$key]['price_cart'] ;
+                $_SESSION['cart']['buy'][$key]['current_cart'] = $new_qty * $_SESSION['cart']['buy'][$key]['price_cart'] ;
 
             }
             // cập nhật lại giỏ hàng 

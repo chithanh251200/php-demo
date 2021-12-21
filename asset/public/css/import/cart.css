@@ -96,3 +96,39 @@
 #action-cart-wp #buy-more{ margin-bottom: 5px;}
 #info-cart-wp table tfoot tr td{ padding: 0px;}
 .table>tbody>tr>th, .table>tbody>tr>td{ border-bottom: 1px solid #ddd;}
+
+
+#modal-notification {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    z-index: -1;
+}
+
+#notification {
+    text-align: center;
+    margin: 0 auto;
+}
+.success-update {
+    display: inline-block;
+    padding: 5px 18px;
+    background-color: red;
+    min-width: 200px;
+    border-radius: 4px;
+    color: #fff;
+    animation: 0.3s  success-update linear;
+}
+@keyframes success-update {
+    from{
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}

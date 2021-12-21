@@ -1,6 +1,6 @@
 <?php
     $id_update_product_cat = $_GET['id_product_cat'];
-    echo $id_update_product_cat;
+    // echo $id_update_product_cat;
 
     $sql = mysqli_query($conn , "SELECT * FROM `cat_product` WHERE `id_cat` = '{$id_update_product_cat}' ");
     $row = mysqli_fetch_assoc($sql);

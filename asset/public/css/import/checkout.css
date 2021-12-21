@@ -42,8 +42,8 @@
     padding: 6px 12px;
     border: 1px solid #cccccc;
 }
-#customer-info-wp .form-row:nth-child(3) .form-col { width: 100%; padding-right: 0;}
-#customer-info-wp .form-row:nth-child(3) .form-col textarea{ height: 150px;}
+#customer-info-wp .form-row:nth-child(4) .form-col { width: 100%; padding-right: 0;}
+#customer-info-wp .form-row:nth-child(4) .form-col textarea{ height: 150px; width: 100%;}
 #customer-info-wp .form-row .form-col input[type="text"]:focus, #customer-info-wp .form-row .form-col input[type="email"]:focus, #customer-info-wp .form-row .form-col input[type="tel"]:focus, #customer-info-wp .form-row:nth-child(3) .form-col textarea:focus{
     border: 1px solid #777;
 }

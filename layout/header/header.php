@@ -11,10 +11,17 @@
         <link href="asset/public/css/carousel/owl.carousel.css" rel="stylesheet" type="text/css"/>
         <link href="asset/public/css/carousel/owl.theme.css" rel="stylesheet" type="text/css"/>
         <link href="asset/public/css/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+        <!-- css slider jquery ui  -->
+        <link href="asset/public/jquery-ui-1.13.0.custom/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+
         <link href="asset/public/style.css" rel="stylesheet" type="text/css"/>
         <link href="asset/public/responsive.css" rel="stylesheet" type="text/css"/>
 
         <script src="asset/public/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+
+        <!-- js slider jquery ui  -->
+        <script src="asset/public/jquery-ui-1.13.0.custom/jquery-ui.min.js" type="text/javascript"></script>
+
         <script src="asset/public/js/elevatezoom-master/jquery.elevatezoom.js" type="text/javascript"></script>
         <script src="asset/public/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
         <script src="asset/public/js/carousel/owl.carousel.js" type="text/javascript"></script>
@@ -76,8 +83,10 @@
                         <div class="wp-inner">
                             <a href="?module=home&act=home" title="" id="logo" class="fl-left"><img src="asset/public/images/logo.png"/></a>
                             <div id="search-wp" class="fl-left">
-                                <form method="POST" action="">
+                                <form method="POST" action="" class="form-search">
                                     <input type="text" name="s" id="s" placeholder="Nhập từ khóa tìm kiếm tại đây!">
+                                    <!-- history  -->
+                                    <div id="list"></div>
                                     <button type="submit" id="sm-s">Tìm kiếm</button>
                                 </form>
                             </div>
@@ -108,7 +117,7 @@
                                         </a>
                                     </div>
                                     <div id="dropdown">
-                                        <p class="desc">Có <span>2 sản phẩm</span> trong giỏ hàng</p>
+                                        <p class="desc">Có <span><?php echo get_num_row() ?> sản phẩm</span> trong giỏ hàng</p>
                                         <ul class="list-cart">
                                             <?php
                                                 if(!empty($_SESSION['cart']['buy'])){
@@ -134,8 +143,8 @@
                                             <p class="price fl-right"><?php echo  number_format(get_total_cart(),0,'.','.') ?>đ</p>
                                         </div>
                                         <dic class="action-cart clearfix">
-                                            <a href="?page=cart" title="Giỏ hàng" class="view-cart fl-left">Giỏ hàng</a>
-                                            <a href="?page=checkout" title="Thanh toán" class="checkout fl-right">Thanh toán</a>
+                                            <a href="?module=cart&act=show" title="Giỏ hàng" class="view-cart fl-left">Giỏ hàng</a>
+                                            <a href="<?php echo !empty($_SESSION['is_username']) ? '?module=cart&act=checkout' : 'login.php' ?>" title="Thanh toán" class="checkout fl-right">Thanh toán</a>
                                         </dic>
                                     </div>
                                 </div>
@@ -143,3 +152,37 @@
                         </div>
                     </div>
                 </div><div id="main-content-wp" class="home-page clearfix">
+                <!-- xửu lý form search khi tiềm kiếm sản phẩm -->
+                <script>
+                    $(document).ready(function(){
+                        $('#s').keyup(function(){
+                            var text = $(this).val();
+                            console.log(text)
+        
+                            if(text != '' ){
+                                $.ajax({
+                                    url : "asset/public/ajax/search.php",
+                                    method : "POST",
+                                    dataType : 'text',
+                                    data : {text : text},
+                                    success : function(data){
+                                        // console.log(data);
+                                        $('#list').css('opacity','1');
+                                        $('#list').html(data);
+                                    }
+                                });
+                            }
+                            else{
+                                // bằng rỗng thì không xuất bảng 
+                                $('#list').html('');
+                                $('#list').css('opacity','0');
+                            }
+                        });
+
+                        // blur ra ngoài ẩn list đi 
+                        $("#s").blur(function(){
+                            $('#list').css('opacity','0');
+                        });
+
+                    });
+                </script>

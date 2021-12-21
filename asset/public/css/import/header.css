@@ -118,7 +118,7 @@
     top: 90px;
     right: 0;
     width: 250px;
-    min-height: 250px;
+    min-height: 128px;
     padding: 10px;
     background: #fff;
     border: 1px solid #e1e1e1;
@@ -184,3 +184,41 @@
 #cart-wp #dropdown .action-cart a.checkout{ background: #d9263c; color: #fff;}
 #cart-wp #dropdown .action-cart a.view-cart:hover{ background: #ccc;}
 #cart-wp #dropdown .action-cart a.checkout:hover{ background: #af1427;}
+
+
+form.form-search {
+    position: relative;
+}
+#list {
+    position: absolute;
+    background: #fff;
+    left: 0;
+    right: 0;
+    top: 36px;
+    bottom: -46px;
+    margin-right: 5px;
+    min-height: 150px;
+    box-shadow: 0px 1px 10px black;
+    opacity: 0;
+    z-index: 2;
+    overflow-y: auto;
+}
+.list-history-item-link {
+    display: block;
+    text-decoration: none;
+    color: #999;
+    text-transform: capitalize;
+    padding: 16px;
+}
+.list-history-item:hover .list-history-item-link{
+    background-color: #ccc;
+}
+.list-history-item-link.text-center{
+    text-align: center;
+}
+.no-product{
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    font-size: 15px;
+}

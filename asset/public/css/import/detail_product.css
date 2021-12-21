@@ -100,3 +100,114 @@
     text-transform: uppercase;
 }
 #post-product-wp .section-detail p{ padding-bottom: 15px; color: #666; text-align: justify;}
+
+
+#info-detail {
+    height: 500px;
+    transition: 1s linear;
+    overflow: hidden;
+}
+
+#see-more{
+    text-align: center;
+    color: rgb(24, 158, 255);
+    background: rgb(238, 238, 238);
+    padding: 10px;
+    border: 1px
+    solid rgb(24, 158, 255);
+}
+#closed{
+    text-align: center;
+    color: rgb(24, 158, 255);
+    background: rgb(238, 238, 238);
+    padding: 10px;
+    border: 1px
+    solid rgb(24, 158, 255);
+    display: none;
+}
+
+#post-comment-wp{
+    background-color: #fff;
+    margin-top: 20px;
+    padding: 10px;
+}
+
+.list-comment {
+    display: flex;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+.list-comment-head {
+    flex-basis: 40%;
+}
+.list-comment-body {
+    flex-basis: 60%;
+}
+.list-comment-head__user {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+img.list-comment-head__user-thumbnail {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.list-comment-body__button {
+    display: flex;
+    align-items: center;
+}
+.comment-submit {
+    display: flex;
+    align-items: center;
+    margin: 26px 0;
+}   
+
+.comment-submit-input {
+    width: 94%;
+}
+#text-comment{
+    width: 100%;
+    border: 1px solid red;
+    background-color: #ccc;
+    border-radius: 22px;
+    padding: 2px;
+    outline: none;
+}
+
+#text-comment::placeholder{
+    color: #000;
+   padding-left: 10px;
+}
+
+#form-submit{
+    display: flex;
+}
+
+.name_product{
+    text-transform: capitalize;
+}
+
+.color-red{
+    color: red;
+}
+.color-green{
+    color: green;
+}
+.list-comment-body__button-like {
+    margin-right: 10px;
+}
+.list-comment-body__button {
+    margin-top: 14px;
+}
+.list-comment-head__user-body {
+    padding: 0 56px;
+}
+img.list-comment-head__user-account {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    margin-right: auto;
+}

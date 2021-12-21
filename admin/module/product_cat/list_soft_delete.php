@@ -27,14 +27,24 @@
     // B : tiềm kiếm theo tên 
     if(isset($_POST['btn-submit-search'])){
         $keyword = $_POST['keyword'];
-        $sql = mysqli_query($conn , "SELECT * FROM `cat_product` , `user` 
-            WHERE `cat_product`.`id_user` = `user`.`id_user` and `name` LIKE '%{$keyword}%' and `is_delete` = 1
-        ");
-        $data = [];
-        while($items = mysqli_fetch_array($sql)){
-            $data[] = $items;
+        if($keyword != ''){
+            $sql = mysqli_query($conn , "SELECT * FROM `cat_product` , `user` 
+            WHERE `cat_product`.`id_user` = `user`.`id_user` and `name`  LIKE '%{$keyword}%' and `is_delete` = 1
+            ");
+            $data = [];
+            while($items = mysqli_fetch_array($sql)){
+                $data[] = $items;
+            }
+            // show_data($data);
         }
-        // show_data($data);
+        else{
+            $sql = mysqli_query($conn , "SELECT * FROM `cat_product` , `user` WHERE `cat_product`.`id_user` = `user`.`id_user` and `is_delete` = 1 LIMIT $start , $sotincanlay ");
+            $data = [];
+            while($items = mysqli_fetch_array($sql)){
+                $data[] = $items;
+            }
+            // show_data($data);
+        }
     }
     // 
     else{
@@ -97,7 +107,11 @@
             <h1 class="m-0 ">Danh Mục Sản Phẩm Đã Xóa</h1>
             <div class="form-search form-inline">
                 <form action="" method="POST">
-                    <input type="text" class="form-control form-search" name="keyword" placeholder="Tìm kiếm">
+                    <input type="text" class="form-control form-search" name="keyword" placeholder="Tìm kiếm" value="<?php
+                    if(!empty($keyword)){
+                        echo $keyword ;
+                    }
+                    ?>">
                     <input type="submit" name="btn-submit-search" value="Tìm kiếm" class="btn btn-primary">
                 </form>
             </div>
@@ -122,7 +136,6 @@
                             <th scope="col" colspan ="2">#</th>
                             <th scope="col">Tên sản phẩm</th>
                             <th scope="col">Người tạo</th>
-                            <th scope="col">Trạng thái </th>
                             <th scope="col">Ngày tạo</th>
                             <th scope="col">Ngày cập nhật</th>
                         </tr>
@@ -143,7 +156,6 @@
                                 <th scope="row"><?php echo $stt ?></th>
                                 <td><?php echo $item['name'] ?></td>    
                                 <td><?php echo $item['user_name'] ?></td>
-                                <td>chưa xử lý</td>
                                 <td><?php echo $item['created_at'] ?></td>
                                 <td><?php echo $item['updated_at'] ?></td>
                             </tr>
@@ -155,12 +167,18 @@
                     </tbody>
                 </table>
             </form>
-            <nav aria-label="Page navigation example"></nav>
-            <nav aria-label="Page navigation example">
-                <?php
-                   echo padding($page , $total , $base='?module=product_cat&act=list');
-                ?>
-            </nav>
+            <?php
+                // không tồn tại keywword thì xuất phân trang , tồn tại keyword thì không xuất
+                if(empty($keyword)){
+            ?>
+                <nav aria-label="Page navigation example">
+                    <?php
+                    echo padding($page , $total , $base='?module=product_cat&act=list');
+                    ?>
+                </nav>
+            <?php
+                }
+            ?>
         </div>
     </div>
 </div>

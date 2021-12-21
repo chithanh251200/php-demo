@@ -136,5 +136,51 @@
             <!-- end  -->
             <button type="submit" name="btn-submit"  class="btn btn-primary">Submit</button>
         </form>
+
+
+        <!-- <div class="form-group my-4">
+            <form class="dropzone" id="my-dropzone"></form>
+            <button id="btn-upload" class="btn btn-primary mt-4">upload drop</button>
+        </div> -->
+
+
+
     </div>
+    
+
+
+    <script>
+        // The constructor of Dropzone accepts two arguments:
+        //
+        // 1. The selector for the HTML element that you want to add
+        //    Dropzone to, the second
+        // 2. An (optional) object with the configuration
+
+        Dropzone.autoDiscover = false;
+
+        var myDropzone = new Dropzone("#my-dropzone", { 
+            url: "asset/public/ajax/upload-drop-product.php",
+            paralleUploads : 3,
+            uploadMultiple : true ,
+            acceptedFiles : '.png , .jpg , .jpeg',
+            autoProcessQueue : false, 
+
+            success : function (file , response) {
+                if(response == 'true'){
+                    console.log('thành công');
+                }
+                else{
+                    console.log('không thành công');
+                }
+            }
+
+        });
+
+
+
+        $('#btn-upload').click(function () {
+            myDropzone.processQueue();
+        })
+
+    </script>
    
